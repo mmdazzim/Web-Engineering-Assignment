@@ -11,11 +11,23 @@
               <nav class="site-navigation text-center ml-auto" role="navigation">
 
                 <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
-                  <li><a href="#home-section" class="nav-link">Home</a></li>
-                  <li><a href="#about-section" class="nav-link">About</a></li>
-                  <li><a href="#discover-section" class="nav-link">Discover</a></li>
-                  <li><a href="#donate-section" class="nav-link">Donate</a></li>
-                  <li><a href="#blog-section" class="nav-link">Blog</a></li>
+                  <li><a href="index.php #home-section" class="nav-link">Home</a></li>
+                  <li><a href="index.php #about-section" class="nav-link">About</a></li>
+                  <li><a href="index.php #discover-section" class="nav-link">Discover</a></li>
+                  <li><a href="index.php #donate-section" class="nav-link">Donate</a></li>
+                    <?php 
+                        if(!isset($_SESSION)) 
+                        { 
+                            session_start(); 
+                        }
+                        
+                        if(isset($_SESSION["loggedin"])==true) {
+                            echo '<li><a href="logout.php" class="nav-link">'.$_SESSION["username"].'(Logout)</a></li>';
+                        }
+                        else
+                            echo '<li><a href="template.php" class="nav-link">Login</a></li>';
+                    ?>
+                  
                   <li><a href="#contact-section" class="nav-link">Contact</a></li>
                 </ul>
               </nav>
