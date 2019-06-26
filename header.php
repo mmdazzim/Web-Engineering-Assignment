@@ -14,7 +14,7 @@
                   <li><a href="index.php #home-section" class="nav-link">Home</a></li>
                   <li><a href="index.php #about-section" class="nav-link">About</a></li>
                   <li><a href="index.php #donate-section" class="nav-link">Donate</a></li>
-                <li><a href="index.php #discover-section" class="nav-link">Profile</a></li>
+                <li><a href="index.php #discover-section" class="nav-link">Admin</a></li>
                     <?php 
                         if(!isset($_SESSION)) 
                         { 

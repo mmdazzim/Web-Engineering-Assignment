@@ -4,6 +4,11 @@
 
     $sql_list = "SELECT * FROM student_list ORDER BY rand() LIMIT 3";
     $result_list = mysqli_query($link, $sql_list);
+
+    $sql_count = "SELECT COUNT(*) AS total FROM student_list";
+    $result_row = mysqli_query($link, $sql_count);
+    $row = mysqli_fetch_array($result_row);
+
     mysqli_close($link);
 ?>
 
@@ -32,6 +37,34 @@
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/style.css">
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          // Add smooth scrolling to all links
+          $("a").on('click', function(event) {
+
+            // Make sure this.hash has a value before overriding default behavior
+            if (this.hash !== "") {
+              // Prevent default anchor click behavior
+              event.preventDefault();
+
+              // Store hash
+              var hash = this.hash;
+
+              // Using jQuery's animate() method to add smooth page scroll
+              // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+              $('html, body').animate({
+                scrollTop: $(hash).offset().top
+              }, 800, function(){
+
+                // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = hash;
+              });
+            } // End if
+          });
+        });
+    </script>
     
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -90,20 +123,20 @@
         <div class="row">
           <div class="col-md-6 mb-4 col-lg-0 col-lg-3">
             <div class="block-counter-1">
-              <span class="number"><span data-number="15">0</span></span>
-              <span class="caption text-black">Number of Orphanage</span>
+              <span class="number"><span data-number="<?php echo $row['total'] ?>">0</span></span>
+              <span class="caption text-black">Number of Students</span>
             </div>
           </div>
           <div class="col-md-6 mb-4 col-lg-0 col-lg-3">
             <div class="block-counter-1">
-              <span class="number"><span data-number="392">0</span></span>
+              <span class="number">RM<span data-number="392">0</span></span>
               <span class="caption text-black">Number of Donations</span>
             </div>
           </div>
           <div class="col-md-6 mb-4 col-lg-0 col-lg-3">
             <div class="block-counter-1">
               <span class="number"><span data-number="3293">0</span></span>
-              <span class="caption text-black">Number of Volunteers</span>
+              <span class="caption text-black">Number of Donors</span>
             </div>
           </div>
           <div class="col-md-6 mb-4 col-lg-0 col-lg-3">
@@ -115,20 +148,6 @@
         </div>
       </div>
     </div>
-
-
-    <div class="site-section bg-image overlay" style="background-image: url('images/hero_1_no-text.jpg');" id="donate-section">
-      <div class="container">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-lg-5 text-center">
-            <h2 class="text-white mb-4">Make A Donation Now! You May Change Lives Forever</h2>
-            <p><a href="#" class="btn btn-primary px-4 py-3 btn-block">Donate Now</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
 
     <div class="site-section">
       <div class="container">
@@ -169,7 +188,16 @@
       </div>
     </div>
 
-
+      <div class="site-section bg-image overlay" style="background-image: url('images/hero_1_no-text.jpg');" id="donate-section">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-lg-5 text-center">
+            <h2 class="text-white mb-4">Make A Donation Now! You May Change Lives Forever</h2>
+            <p><a href="#" class="btn btn-primary px-4 py-3 btn-block">Donate Now</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="site-section" id="team-section">
       <div class="container">
