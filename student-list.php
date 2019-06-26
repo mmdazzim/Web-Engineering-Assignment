@@ -1,4 +1,19 @@
+<?php 
+    
+    include "config.php";
 
+    $offset = 0;
+    $limit = 3;
+    $sql_list = "SELECT * FROM student_list LIMIT $offset,$limit";
+    $result_list = mysqli_query($link, $sql_list);
+
+    $sql_count = "SELECT COUNT(*) AS total FROM student_list";
+    $result_row = mysqli_query($link, $sql_count);
+    $row = mysqli_fetch_array($result_row);
+    $total_row = ceil($row['total'] / 3);
+    $total_col = $row['total'];
+      
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,122 +63,42 @@
         <div class="row mb-5 justify-content-center">
           <div class="col-md-7 text-center">
               <h2 class="text-black text-uppercase section-title">Our Students In Need</h2>
-              <?php 
-                    $absolute_path = realpath("index.php");
-
-                    print "Absolute path is: " . $absolute_path;
-              
-              $dir = dirname("index.php");
-
-              print "directory is: " . $dir . "<BR>";
-              
-              ?>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut corporis, eius, eos consectetur consequuntur sit. Aut, perspiciatis, reprehenderit.</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0" data-aos="fade-up">
-            <div class="block-team-member-1 text-center rounded">
-              <figure>
-                <img src="images/person_1.jpg" alt="Image" class="img-fluid rounded-circle">
-              </figure>
-              <h3 class="font-size-20 text-white">Jean Smith</h3>
-              <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3">Mining Expert</span>
-              <p class="px-3 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, repellat. At, soluta. Repellendus vero, consequuntur!</p>
-              <div class="block-social-1">
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-facebook"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-twitter"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-instagram"></span></a>
-              </div>
-            </div>
-          </div>
+          
+        <?php for($y=0;$y < $total_row; $y++) { ?>  
+          
+            <div class="row mb-5 mt-5">
+                
+            <?php while($list = mysqli_fetch_array($result_list)) { $x = 0; $x++; ?>
+                
+                <div id="container-num-<?php echo $x;?>" class="col-lg-4 col-md-6 mb-4 mb-lg-0" data-aos="fade-up">
+                    <div class="block-team-member-1 text-center rounded">
+                      <figure>
+                        <img src="images/<?php echo $list['img_name'] ?>" alt="Image" class="img-fluid rounded-circle">
+                      </figure>
+                      <h3 class="font-size-20 text-black"><?php echo $list['first_name'] ." ". $list['last_name'] ?></h3>
+                      <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3"><?php echo $list['university_name'] ?></span>
+                      <p class="px-3 mb-3">Age: <?php echo $list['age'] ?> <br> Gender: <?php echo $list['gender'] ?> <br> School Name: <?php echo $list['school_name'] ?> <br>Sponsor Duration: <?php echo $list['sponsor_duration'] ?><br> Sponsor Requirement: RM<?php echo $list['sponsor_requirement'] ?><br> <?php echo $list['id'] ?></p>
+                      <div class="">
+                          <a href="student-detail.php?id=<?php echo $list['id'] ?>" class="btn btn-primary px-4 py-3 btn-block">More Detail</a>
+                      </div>
+                    </div>
+                  </div>
 
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
-            <div class="block-team-member-1 text-center rounded">
-              <figure>
-                <img src="images/person_2.jpg" alt="Image" class="img-fluid rounded-circle">
-              </figure>
-              <h3 class="font-size-20 text-white">Bob Carry</h3>
-              <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3">Project Manager</span>
-              <p class="px-3 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil quia veritatis, nam quam obcaecati fuga.</p>
-              <div class="block-social-1">
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-facebook"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-twitter"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-instagram"></span></a>
-              </div>
+            <?php }
+    
+                $offset += 3; 
+                $sql_list = "SELECT * FROM student_list LIMIT $offset,$limit";
+                $result_list = mysqli_query($link, $sql_list);
+                
+            ?>
+                
             </div>
-          </div>
+          
+        <?php } mysqli_close($link); ?>
 
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-            <div class="block-team-member-1 text-center rounded">
-              <figure>
-                <img src="images/person_3.jpg" alt="Image" class="img-fluid rounded-circle">
-              </figure>
-              <h3 class="font-size-20 text-white">Ricky Fisher</h3>
-              <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3">Engineer</span>
-              <p class="px-3 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas quidem, laudantium, illum minus numquam voluptas?</p>
-              <div class="block-social-1">
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-facebook"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-twitter"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-instagram"></span></a>
-              </div>
-            </div>
-          </div> 
-        </div>
-        <div class="row mb-5 mt-5">
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0" data-aos="fade-up">
-            <div class="block-team-member-1 text-center rounded">
-              <figure>
-                <img src="images/person_1.jpg" alt="Image" class="img-fluid rounded-circle">
-              </figure>
-              <h3 class="font-size-20 text-white">Jean Smith</h3>
-              <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3">Mining Expert</span>
-              <p class="px-3 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, repellat. At, soluta. Repellendus vero, consequuntur!</p>
-              <div class="block-social-1">
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-facebook"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-twitter"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-instagram"></span></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
-            <div class="block-team-member-1 text-center rounded">
-              <figure>
-                <img src="images/person_2.jpg" alt="Image" class="img-fluid rounded-circle">
-              </figure>
-              <h3 class="font-size-20 text-white">Bob Carry</h3>
-              <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3">Project Manager</span>
-              <p class="px-3 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil quia veritatis, nam quam obcaecati fuga.</p>
-              <div class="block-social-1">
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-facebook"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-twitter"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-instagram"></span></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-            <div class="block-team-member-1 text-center rounded">
-              <figure>
-                <img src="images/person_3.jpg" alt="Image" class="img-fluid rounded-circle">
-              </figure>
-              <h3 class="font-size-20 text-white">Ricky Fisher</h3>
-              <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3">Engineer</span>
-              <p class="px-3 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas quidem, laudantium, illum minus numquam voluptas?</p>
-              <div class="block-social-1">
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-facebook"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-twitter"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-instagram"></span></a>
-              </div>
-            </div>
-          </div> 
-        </div>
-         <div class="row mb-5 mt-5 justify-content-center">
-          <div class="col-md-4 text-center">
-              <p><a href="#" class="btn btn-primary px-4 py-3 btn-block">View More Students</a></p>
-          </div>
-        </div>
       </div>
 
 

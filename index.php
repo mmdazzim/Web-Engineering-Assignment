@@ -1,3 +1,12 @@
+<?php 
+    
+    include "config.php";
+
+    $sql_list = "SELECT * FROM student_list ORDER BY rand() LIMIT 3";
+    $result_list = mysqli_query($link, $sql_list);
+    mysqli_close($link);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -171,57 +180,27 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0" data-aos="fade-up">
-            <div class="block-team-member-1 text-center rounded">
-              <figure>
-                <img src="images/person_1.jpg" alt="Image" class="img-fluid rounded-circle">
-              </figure>
-              <h3 class="font-size-20 text-white">Jean Smith</h3>
-              <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3">Mining Expert</span>
-              <p class="px-3 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, repellat. At, soluta. Repellendus vero, consequuntur!</p>
-              <div class="block-social-1">
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-facebook"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-twitter"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-instagram"></span></a>
+            <?php while($result = mysqli_fetch_array($result_list)) { ?>
+            
+              <div class="col-lg-4 col-md-6 mb-4 mb-lg-0" data-aos="fade-up">
+                <div class="block-team-member-1 text-center rounded">
+                  <figure>
+                    <img src="images/<?php echo $result['img_name'] ?>" alt="Image" class="img-fluid rounded-circle">
+                  </figure>
+                  <h3 class="font-size-20 text-black"><?php echo $result['first_name'] ." ". $result['last_name'] ?></h3>
+                  <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3"><?php echo $result['university_name'] ?></span>
+                  <p class="px-3 mb-3">Age: <?php echo $result['age'] ?> <br> Gender: <?php echo $result['gender'] ?> <br> School Name: <?php echo $result['school_name'] ?> <br>Sponsor Duration: <?php echo $result['sponsor_duration'] ?><br> Sponsor Requirement: RM<?php echo $result['sponsor_requirement'] ?></p>
+                  <div class="">
+                    <a href="student-detail.php?id=<?php echo $result['id'] ?>" class="btn btn-primary px-4 py-3 btn-block">More Detail</a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
-            <div class="block-team-member-1 text-center rounded">
-              <figure>
-                <img src="images/person_2.jpg" alt="Image" class="img-fluid rounded-circle">
-              </figure>
-              <h3 class="font-size-20 text-white">Bob Carry</h3>
-              <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3">Project Manager</span>
-              <p class="px-3 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil quia veritatis, nam quam obcaecati fuga.</p>
-              <div class="block-social-1">
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-facebook"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-twitter"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-instagram"></span></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-            <div class="block-team-member-1 text-center rounded">
-              <figure>
-                <img src="images/person_3.jpg" alt="Image" class="img-fluid rounded-circle">
-              </figure>
-              <h3 class="font-size-20 text-white">Ricky Fisher</h3>
-              <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3">Engineer</span>
-              <p class="px-3 mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas quidem, laudantium, illum minus numquam voluptas?</p>
-              <div class="block-social-1">
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-facebook"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-twitter"></span></a>
-                <a href="#" class="btn border-w-2 rounded primary-primary-outline--hover"><span class="icon-instagram"></span></a>
-              </div>
-            </div>
-          </div> 
+            
+            <?php } ?>
         </div>
          <div class="row mb-5 mt-5 justify-content-center">
           <div class="col-md-4 text-center">
-              <p><a href="#" class="btn btn-primary px-4 py-3 btn-block">View More Students</a></p>
+              <p><a href="student-list.php" class="btn btn-primary px-4 py-3 btn-block">View More Students</a></p>
           </div>
         </div>
       </div>
@@ -236,32 +215,12 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-lg-6 mb-5">
-            <form action="#" method="post">
-              <div class="form-group row">
-                <div class="col-md-6 mb-4 mb-lg-0">
-                  <input type="text" class="form-control" placeholder="First name">
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" placeholder="First name">
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <div class="col-md-12">
-                  <input type="text" class="form-control" placeholder="Email address">
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <div class="col-md-12">
-                  <textarea name="" id="" class="form-control" placeholder="Write your message." cols="30" rows="10"></textarea>
-                </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-md-6 ml-auto">
-                  <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Send Message">
-                </div>
-              </div>
+            <form class="contact-form" action="contactus.php" method="post">
+              <input type="text" name="name" placeholder="your name">
+              <input type="text" name="mail" placeholder="email">
+               <textarea name="message"  placeholder="Write your message."></textarea>
+               
+              <button type="submit" name="submit"> send mail</button>
             </form>
           </div>
           

@@ -13,8 +13,8 @@
                 <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
                   <li><a href="index.php #home-section" class="nav-link">Home</a></li>
                   <li><a href="index.php #about-section" class="nav-link">About</a></li>
-                  <li><a href="index.php #discover-section" class="nav-link">Discover</a></li>
                   <li><a href="index.php #donate-section" class="nav-link">Donate</a></li>
+                <li><a href="index.php #discover-section" class="nav-link">Profile</a></li>
                     <?php 
                         if(!isset($_SESSION)) 
                         { 
@@ -25,7 +25,7 @@
                             echo '<li><a href="logout.php" class="nav-link">'.$_SESSION["username"].'(Logout)</a></li>';
                         }
                         else
-                            echo '<li><a href="template.php" class="nav-link">Login</a></li>';
+                            echo '<li><a href="login.php" class="nav-link">Login</a></li>';
                     ?>
                   
                   <li><a href="#contact-section" class="nav-link">Contact</a></li>
