@@ -5,7 +5,7 @@
           
             
             <div class="site-logo">
-              <a href="index.php" class="text-primary">Foundation</a>
+              <a href="index.php" class="text-primary">SM Vision</a>
             </div>
             
               <nav class="site-navigation text-center ml-auto" role="navigation">

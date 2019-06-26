@@ -3,8 +3,8 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username = $password = $confirm_password = $fullName = $email = $phoneNumber = "";
+$username_err = $password_err = $confirm_password_err = $fullName_err = $email_err = $phoneNumber_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -61,36 +61,104 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
     
+//    // Check input errors before inserting in database
+//    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+//        
+//        // Prepare an insert statement
+//        $sql = "INSERT INTO users (username, password, full_name, email, phone_number) VALUES (?, ?, ?, ?, ?)";
+//         
+//        if($stmt = mysqli_prepare($link, $sql)){
+//            // Bind variables to the prepared statement as parameters
+//            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_fullname, $param_email, $param_phone_number);
+//            
+//            // Set parameters
+//            $param_username = $username;
+//            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+//            $param_fullname = "my full name here";
+//            $param_email = "email@gmail.com";
+//            $param_phone_number = "123445689";
+//            
+//            // Attempt to execute the prepared statement
+//            if(mysqli_stmt_execute($stmt)){
+//                // Redirect to login page
+//                header("location: template.php");
+//            } else{
+//                echo "Something went wrong. Please try again later.";
+//            }
+//        }
+//         
+//         //Close statement
+//        mysqli_stmt_close($stmt);
+//    }
+    
+    if (empty($_POST["full_name"])) {
+        $fullName_err = "Name is required";
+    } 
+    else {
+        $fullName = test_input($_POST["full_name"]);
+        // check if name only contains letters and whitespace
+        if (!preg_match("/^[a-zA-Z ]*$/",$fullName)) {
+          $nameErr = "Only letters and white space allowed"; 
+        }
+    }
+    
+    
+    
+    if (empty($_POST["email"])) {
+        $email_err = "Email is required";
+    } else {
+        $email = test_input($_POST["email"]);
+        // check if e-mail address is well-formed
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          $email_err = "Invalid email format"; 
+        }
+      }
+
+    if (empty($_POST["phone_number"])) {
+            $phoneNumber_err = "Phone Number is required";
+        }
+
     // Check input errors before inserting in database
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $sql = "INSERT INTO users (username, password, full_name, email, phone_number) VALUES (?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_fullname, $param_email, $param_phone_number);
             
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_fullname = "my full name here";
+            $param_email = "email@gmail.com";
+            $param_phone_number = "123445689";
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
                 header("location: template.php");
             } else{
+                echo mysqli_stmt_error;
                 echo "Something went wrong. Please try again later.";
             }
         }
          
-        // Close statement
+         //Close statement
         mysqli_stmt_close($stmt);
     }
     
     // Close connection
     mysqli_close($link);
 }
+
+    function test_input($data) {
+      $data = trim($data);
+      $data = stripslashes($data);
+      $data = htmlspecialchars($data);
+      return $data;
+    }
 ?>
  
 <!DOCTYPE html>
@@ -122,6 +190,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
                 <label>Confirm Password</label>
                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
+                <span class="help-block"><?php echo $confirm_password_err; ?></span>
+            </div>
+            <div class="form-group <?php echo (!empty($fullName_err)) ? 'has-error' : ''; ?>">
+                <label>Full Name</label>
+                <input type="text" name="full_name" class="form-control" value="<?php echo $fullName; ?>">
+                <span class="help-block"><?php echo $fullName_err; ?></span>
+            </div>
+            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+                <label>Email</label>
+                <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                <span class="help-block"><?php echo $email_err; ?></span>
+            </div>
+            <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                <label>Phone Number</label>
+                <input type="text" name="phone_number" class="form-control" value="<?php echo $confirm_password; ?>">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group">
