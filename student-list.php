@@ -89,7 +89,7 @@
 
             <?php }
     
-                $offset += 3; 
+                echo $offset += 3; 
                 $sql_list = "SELECT * FROM student_list LIMIT $offset,$limit";
                 $result_list = mysqli_query($link, $sql_list);
                 

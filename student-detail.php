@@ -3,15 +3,51 @@
         session_start(); 
     }
 
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+
     include "config.php";
+
+    
 
     $id = $_GET['id'];
     $sql_list = "SELECT * FROM student_list WHERE id = $id";
     $result_list = mysqli_query($link, $sql_list);
     $result = mysqli_fetch_array($result_list);
-    mysqli_close($link);
+    
 
     $_SESSION["student_name"] = $result['first_name']." ".$result['last_name'];
+
+    $current_user = $_SESSION["username"];
+
+        $sql_get_user = "SELECT * FROM users WHERE username = $current_user";
+        $result_list = mysqli_query($link, $sql_get_user);
+        $user_id = $result_list["id"];
+
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+            $sql_insert = "INSERT INTO sponsor_application (student_id, user_id) VALUES ('$id', '$user_id')";
+            if ($link->query($sql_insert) === TRUE) {
+                
+                $sql_update = "UPDATE student_list SET sponsor_status = 'Sponsored' WHERE id= $id;";
+                    if ($link->query($sql) === TRUE) {
+                        echo "Success!";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $link->error;
+                    }
+                
+                echo "Success!";
+                header("location: student_list.php");
+            } else {
+                echo "Error: " . $sql . "<br>" . $link->error;
+                }
+            
+            
+        }
+
+    mysqli_close($link);
 ?>
 
 <!DOCTYPE html>
@@ -69,10 +105,17 @@
             </figure>
             <h3 class="font-size-20 text-black"><?php echo $result['first_name'] ." ". $result['last_name'] ?></h3>
             <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3"><?php echo $result['university_name'] ?></span>
-            <p class="px-3 mb-3"><?php echo $result['biography'] ?></p>
+            <p class="px-3 mb-3">Age: <?php echo $result['age'] ?> <br> Gender: <?php echo $result['gender'] ?> <br> School Name: <?php echo $result['school_name'] ?> <br>Sponsor Duration: <?php echo $result['sponsor_duration'] ?><br> Sponsor Requirement: RM<?php echo $result['sponsor_requirement'] ?></p>
         <div class="">
-            <a href="#" class="btn btn-primary px-4 py-3 btn-block">Sponsor Now</a>
+            <a href="sponsor-form.php?id=<?php echo $id ?>" class="btn btn-primary px-4 py-3 btn-block">Sponsor Now</a>
         </div>
+<!--
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <div class="form-group">
+                        <input type="submit" class="btn btn-primary px-4 py-3 btn-block" value="SPONSOR NOW">
+                    </div>
+            </form>
+-->
         </div>
     </div>
 

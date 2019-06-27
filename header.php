@@ -30,10 +30,7 @@
                         if(isset($_SESSION["loggedin"])==true) {    
                             
                             if($_SESSION["isAdmin"]) {
-                                echo '<li><a href="index.php #discover-section" class="nav-link">Admin</a></li>';
-                            }
-                            else {
-                                echo '<li><a href="index.php #discover-section" class="nav-link">Profile</a></li>';
+                                echo '<li><a href="admin.php" class="nav-link">AdminPanel</a></li>';
                             }
                             echo '<li><a href="logout.php" class="nav-link">'.$_SESSION["username"].'(Logout)</a></li>';
                         }

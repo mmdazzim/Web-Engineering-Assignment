@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 27, 2019 at 05:30 PM
+-- Generation Time: Jun 27, 2019 at 10:08 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.2.18
 
@@ -55,17 +55,26 @@ INSERT INTO `donations` (`id`, `name`, `amount`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sposor_application`
+-- Table structure for table `sponsor_application`
 --
 
-DROP TABLE IF EXISTS `sposor_application`;
-CREATE TABLE IF NOT EXISTS `sposor_application` (
-  `idsposor_application` int(11) NOT NULL AUTO_INCREMENT,
-  `status` varchar(45) DEFAULT 'Pending',
+DROP TABLE IF EXISTS `sponsor_application`;
+CREATE TABLE IF NOT EXISTS `sponsor_application` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) DEFAULT NULL,
+  `user_id` varchar(45) DEFAULT NULL,
   `date_and_time` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idsposor_application`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `student_id_UNIQUE` (`student_id`),
+  UNIQUE KEY `user_id_UNIQUE` (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sponsor_application`
+--
+
+INSERT INTO `sponsor_application` (`id`, `student_id`, `user_id`, `date_and_time`) VALUES
+(1, 15, '', '2019-06-28 05:49:05');
 
 -- --------------------------------------------------------
 
@@ -84,25 +93,26 @@ CREATE TABLE IF NOT EXISTS `student_list` (
   `university_name` varchar(50) NOT NULL,
   `biography` text,
   `img_name` varchar(255) DEFAULT NULL,
-  `sponsor_duration` int(2) DEFAULT NULL,
-  `sponsor_requirement` int(6) DEFAULT NULL,
-  `sponsor_status` enum('Waiting','Donated') DEFAULT NULL,
+  `sponsor_duration` varchar(15) NOT NULL,
+  `sponsor_requirement` int(10) NOT NULL,
+  `sponsor_status` varchar(25) DEFAULT 'Pending',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student_list`
 --
 
 INSERT INTO `student_list` (`id`, `first_name`, `last_name`, `age`, `gender`, `school_name`, `university_name`, `biography`, `img_name`, `sponsor_duration`, `sponsor_requirement`, `sponsor_status`, `created_at`) VALUES
-(1, 'Muhammad Azzim', 'Nor Fazilan', 21, 'Male', 'School Of IT', 'Sunway University', 'This student requires some amount of sponsorship in order to complete the semester', 'img1.jpg', 8, 10000, NULL, '2019-06-27 02:47:44'),
-(2, 'Shanthi a/l', 'Suriaprakash Malayalam', 18, 'Female', 'School of Hospitality', 'Universiti Tunku Abdul Rahman', '-', 'img2.jpg', 12, 22500, 'Waiting', '2019-06-28 00:00:10'),
-(3, 'Mohamed Hj Nik Wazzirul Hamjah bin', 'Tarudin', 20, 'Male', 'School of Nursing', 'Cosmopoint International College Of Technology', '-', 'img3.jpg', 36, 24180, 'Waiting', '2019-06-28 00:08:45'),
-(4, 'Che Nur\'irfaan Suami', 'bin Nik Shazwan Suhaimi', 19, 'Male', 'School of Business', 'Universiti Teknologi MARA System', '-', 'img4.jpg', 24, 14840, 'Donated', '2019-06-28 00:15:24'),
-(5, 'Muhamad Wan Lukman Samsuri', 'bin Jumat', 20, 'Male', 'School of IT', 'Nilai University', '-', 'img5.jpg', 12, 15000, 'Donated', '2019-06-28 00:21:49'),
-(6, 'Kam Bae', 'Jiang', 17, 'Female', 'School of Arts', 'University Teknologi Mara', '-', 'img6.jpg', 24, 20000, 'Donated', '2019-06-28 00:32:56'),
-(7, 'Koay Jiong', 'Zhang', 25, 'Male', 'School of IT', 'Kolej UNITI', '-', 'img7.jpg', 12, 25000, 'Waiting', '2019-06-28 00:39:31');
+(1, 'Muhammad Azzim', 'Nor Fazilan', 21, 'Male', 'School Of IT', 'Sunway University', 'This student requires some amount of sponsorship in order to complete the semester', 'img1.jpg', '8 months', 10000, 'Sponsored', '2019-06-27 02:47:44'),
+(2, 'Shanthi a/l', 'Suriaprakash Malayalam', 18, 'Female', 'School of Hospitality', 'Universiti Tunku Abdul Rahman', '-', 'img2.jpg', '12 months', 22500, 'Pending', '2019-06-28 00:00:10'),
+(3, 'Mohamed Hj Nik Wazzirul Hamjah bin', 'Tarudin', 20, 'Male', 'School of Nursing', 'Cosmopoint International College Of Technology', '-', 'img3.jpg', '36 months', 24180, 'Pending', '2019-06-28 00:08:45'),
+(4, 'Che Nur\'irfaan Suami', 'bin Nik Shazwan Suhaimi', 19, 'Male', 'School of Business', 'Universiti Teknologi MARA System', '-', 'img4.jpg', '24 months', 14840, 'Sponsored', '2019-06-28 00:15:24'),
+(5, 'Muhamad Wan Lukman Samsuri', 'bin Jumat', 20, 'Male', 'School of IT', 'Nilai University', '-', 'img5.jpg', '12 months', 15000, 'Pending', '2019-06-28 00:21:49'),
+(6, 'Kam Bae', 'Jiang', 17, 'Female', 'School of Arts', 'University Teknologi Mara', '-', 'img6.jpg', '24 months', 20000, 'Pending', '2019-06-28 00:32:56'),
+(7, 'Koay Jiong', 'Zhang', 25, 'Male', 'School of IT', 'Kolej UNITI', '-', 'img7.jpg', '12 months', 25000, 'Pending', '2019-06-28 00:39:31'),
+(8, 'Donkey', 'Kong', 20, 'Male', 'School of IT', 'Sunway University', NULL, '12565468_10207515220933075_2167107954861889571_n.jpg', '8', 25000, 'Pending', '2019-06-28 04:57:16');
 
 -- --------------------------------------------------------
 
