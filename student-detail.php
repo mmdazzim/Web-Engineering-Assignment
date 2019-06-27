@@ -1,12 +1,17 @@
 <?php 
-    
+    if(!isset($_SESSION)) { 
+        session_start(); 
+    }
+
     include "config.php";
 
-    $id= $_GET['id'];
+    $id = $_GET['id'];
     $sql_list = "SELECT * FROM student_list WHERE id = $id";
     $result_list = mysqli_query($link, $sql_list);
     $result = mysqli_fetch_array($result_list);
     mysqli_close($link);
+
+    $_SESSION["student_name"] = $result['first_name']." ".$result['last_name'];
 ?>
 
 <!DOCTYPE html>

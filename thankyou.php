@@ -1,6 +1,31 @@
 <?php
 // Include config file
 require_once "config.php";
+
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    
+    if (empty($_POST["name"])) {
+        $name = "Anonymous";
+    } 
+    else {
+        $name = test_input($_POST["name"]);
+    }
+    
+    $amount = $_POST["amount"];
+    
+    $sql = "INSERT INTO donations (name, amount) VALUES ('$name', '$amount')";
+    
+}
+
+function test_input($data) {
+      $data = trim($data);
+      $data = stripslashes($data);
+      $data = htmlspecialchars($data);
+      return $data;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +34,7 @@ require_once "config.php";
     <title>SM Vision &mdash; Education Charity Organization</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta http-equiv="refresh" content="3;url=index.php" />  
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700|Anton" rel="stylesheet">
     
 
@@ -50,13 +75,21 @@ require_once "config.php";
     <div class="site-section bg-image overlay counter" style="background-image: url('images/hero_1_no-text.jpg');" id="about-section">
     	<div class="container col-md-4 justify-content-center">
     		<div class=" text-black">
-    			<h2>Thank You!</h2>
-    			<p>Your donation of RM<?php 
-    			if (isset($_POST["amount"])) 
-    			{
-    			    echo $_POST["amount"];
-    			} 
-    			?> has been successfully processed. Your money will contribute to improve this website and services.</p>
+                
+                <?php if ($link->query($sql) === TRUE) { ?>
+                        <h2>Thank You!</h2>
+    			         <p>Your donation of RM<?php 
+    			             if (isset($_POST["amount"])) 
+                                {
+                                    echo $_POST["amount"];
+                                } 
+    			         ?> has been successfully processed. Your money will be distribute to those in need. Redirecting to homepage in 3 seconds...</p>
+                 <?php   } 
+                    else {
+                        echo "Error: " . $sql . "<br>" . $link->error;
+                    } 
+                ?>
+    			
     		</div>
     	</div>
     </div>

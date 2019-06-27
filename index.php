@@ -8,6 +8,14 @@
     $sql_count = "SELECT COUNT(*) AS total FROM student_list";
     $result_row = mysqli_query($link, $sql_count);
     $row = mysqli_fetch_array($result_row);
+    
+    $sql_donation = "SELECT SUM(amount) AS total_amount FROM donations";
+    $result_donation = mysqli_query($link, $sql_donation);
+    $row_donation = mysqli_fetch_array($result_donation);
+
+    $sql_donation2 = "SELECT COUNT(*) AS total_count FROM donations";
+    $result_donation2 = mysqli_query($link, $sql_donation2);
+    $row_donation2 = mysqli_fetch_array($result_donation2);
 
     mysqli_close($link);
 ?>
@@ -84,8 +92,8 @@
 <?php include 'header.php'; ?>
     
     <div class="owl-carousel slide-one-item">
-      <a href="#"><img src="images/hero_1.jpg" alt="Image" class="img-fluid"></a>
-      <a href="#"><img src="images/hero_2.jpg" alt="Image" class="img-fluid"></a>
+      <a href="#"><img src="images/new_img1.jpg" alt="Image" class="img-fluid"></a>
+      <a href="#"><img src="images/new_img2.jpg" alt="Image" class="img-fluid"></a>
     </div>
     
     <div class="d-block d-md-flex intro-engage">
@@ -128,20 +136,20 @@
           </div>
           <div class="col-md-6 mb-4 col-lg-0 col-lg-3">
             <div class="block-counter-1">
-              <span class="number">RM<span data-number="392">0</span></span>
-              <span class="caption text-black">Number of Donations</span>
+              <span class="number"><span data-number="<?php echo $row_donation['total_amount'] ?>">0</span></span>
+              <span class="caption text-black">Total Donations(RM)</span>
             </div>
           </div>
           <div class="col-md-6 mb-4 col-lg-0 col-lg-3">
             <div class="block-counter-1">
-              <span class="number"><span data-number="3293">0</span></span>
+              <span class="number"><span data-number="<?php echo $row_donation2['total_count'] ?>">0</span></span>
               <span class="caption text-black">Number of Donors</span>
             </div>
           </div>
           <div class="col-md-6 mb-4 col-lg-0 col-lg-3">
             <div class="block-counter-1">
-              <span class="number"><span data-number="1212">0</span></span>
-              <span class="caption text-black">Number of Orphans</span>
+              <span class="number"><span data-number="<?php echo rand(10,1500) ?>">0</span></span>
+              <span class="caption text-black">Random Number</span>
             </div>
           </div>
         </div>
@@ -192,7 +200,7 @@
         <div class="row align-items-center justify-content-center">
           <div class="col-lg-5 text-center">
             <h2 class="text-white mb-4">Make A Donation Now! You May Change Lives Forever</h2>
-            <p><a href="#" class="btn btn-primary px-4 py-3 btn-block">Donate Now</a></p>
+            <p><a href="donate.php" class="btn btn-primary px-4 py-3 btn-block">Donate Now</a></p>
           </div>
         </div>
       </div>
@@ -244,7 +252,7 @@
           <div class="col-lg-6 mb-5">
             <form class="contact-form" action="mailto:ghanthas@gmail.com" method="post" enctype="text/plain">
       <div class="form-group row">
-       <div class="col-md-6 mb-4 mb-lg-0">
+       <div class="col-md-12">
          <input name='name' type="text"  class="form-control" placeholder="Your name">
        </div>
      </div>
@@ -257,7 +265,7 @@
 
      <div class="form-group row">
        <div class="col-md-12">
-         <textarea name="message"  placeholder="Write your message." cols="30" rows="10"></textarea>
+         <textarea name="message"  placeholder="Write your message." cols="65" rows="10"></textarea>
        </div>
      </div>
      <div class="form-group row">

@@ -1,3 +1,12 @@
+<?php
+
+if(!isset($_SESSION)) { 
+        session_start(); 
+    }
+// Include config file
+require_once "config.php";
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -5,7 +14,7 @@
     <title>SM Vision &mdash; Education Charity Organization</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta http-equiv="refresh" content="3;url=index.php" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700|Anton" rel="stylesheet">
     
 
@@ -46,15 +55,17 @@
     <div class="site-section bg-image overlay counter" style="background-image: url('images/hero_1_no-text.jpg');" id="about-section">
     	<div class="container col-md-4 justify-content-center">
     		<div class=" text-black">
-    			<h2>DONATE</h2>
-    			<p>Any amount helps!</p>
-    			<form action="thankyou.php" method="post">
-                    <h5>Name</h5>
-                    <input type="text"  name="name" placeholder="Anonymous"><br><br>
-                    <h5>Amount</h5>
-					<input type="number" min="10" name="amount" placeholder="RM"><br><br>
-					<input type="submit" class="btn btn-primary" value="Donate">
-				</form>
+                
+                <?php if ($link->query($sql) === TRUE) { ?>
+                        <h2>Thank You!</h2>
+    			         <p>Your application to sponsor <b><?php $_SESSION["student_name"]
+                             ?></b> has been successfully processed. Your money will contribute to improve this website and services.</p>
+                 <?php   } 
+                    else {
+                        echo "Error: " . $sql . "<br>" . $link->error;
+                    } 
+                ?>
+    			
     		</div>
     	</div>
     </div>
