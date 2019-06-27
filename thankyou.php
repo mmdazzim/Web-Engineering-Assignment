@@ -1,3 +1,8 @@
+<?php
+// Include config file
+require_once "config.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -45,12 +50,13 @@
     <div class="site-section bg-image overlay counter" style="background-image: url('images/hero_1_no-text.jpg');" id="about-section">
     	<div class="container col-md-4 justify-content-center">
     		<div class=" text-black">
-    			<h2>DONATE</h2>
-    			<p>Your donation help our work</p>
-    			<form action="thankyou.php" method="post">
-					<input type="number" name="amount" placeholder="RM"><br></br>
-					<input type="submit" class="btn btn-primary" value="Donate">
-				</form>
+    			<h2>Thank You!</h2>
+    			<p>Your donation of RM<?php 
+    			if (isset($_POST["amount"])) 
+    			{
+    			    echo $_POST["amount"];
+    			} 
+    			?> has been successfully processed. Your money will contribute to improve this website and services.</p>
     		</div>
     	</div>
     </div>
