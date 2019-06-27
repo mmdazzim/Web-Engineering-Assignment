@@ -90,16 +90,16 @@
     
     <div class="d-block d-md-flex intro-engage">
       <div class="">
-        <h2>Rescue An Orphan</h2>
-        <p>Accusantium dignissimos voluptas rem consequatur blanditiis error ratione illo sit quasi ut praesentium magnam</p>
+        <h2>Our Team</h2>
+        <p>The people who are crazy enough to think they can change the world, are the ones who do.</p>
       </div>
       <div>
-        <h2>Feed The Hungry</h2>
-        <p>Accusantium dignissimos voluptas rem consequatur blanditiis error ratione illo sit quasi ut praesentium magnam</p>
+        <h2>Invest in their future</h2>
+        <p>Become a Friend by giving monthly, and we’ll keep you updated on the continuous impact we’re making together.</p>
       </div>
       <div>
         <h2>Free Education</h2>
-        <p>Accusantium dignissimos voluptas rem consequatur blanditiis error ratione illo sit quasi ut praesentium magnam</p>
+        <p>The nature of the consequence of the error of the blandishments of pleasure worthy of accusing him to be as great as if she were present,</p>
       </div>
     </div>
 
@@ -116,8 +116,7 @@
           </div>
           <div class="col-lg-5 ml-auto align-self-lg-center">
             <h2 class="text-black mb-4 text-uppercase section-title">Our Mission</h2>
-            <p class="text-black">Accusantium dignissimos voluptas rem consequatur blanditiis error ratione illo sit quasi ut, praesentium magnam, pariatur quae, necessitatibus</p>
-            <p class="text-black">Dolor, eligendi voluptate ducimus itaque esse autem perspiciatis sint! Recusandae dolor aliquid inventore sit,</p>
+            <p class="text-black"> Our mission is to provide a platform for donors to donate a needy student for their educations.</p>
           </div>
         </div>
         <div class="row">
@@ -155,33 +154,33 @@
           <div class="col-md-6 col-lg-4 mb-4 text-center">
             <span class="flaticon-piggy-bank d-block mb-3 display-3 text-secondary"></span>
             <h3 class="text-primary h4 mb-2">Make Donation</h3>
-            <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
+            <p>As a consequence of that is worthy of denouncing pleasure.</p>
           </div>
           <div class="col-md-6 col-lg-4 mb-4 text-center">
             <span class="flaticon-blood d-block mb-3 display-3 text-secondary"></span>
-            <h3 class="text-primary h4 mb-2">Medical Health</h3>
-            <p>Praesentium magnam pariatur quae necessitatibus eligendi voluptate ducimus.</p>
+            <h3 class="text-primary h4 mb-2">Power</h3>
+            <p>We believe in the power of education to close the gaps that separate low-income students and students of color from other young Americans.</p>
           </div>
           <div class="col-md-6 col-lg-4 mb-4 text-center">
             <span class="flaticon-food d-block mb-3 display-3 text-secondary"></span>
-            <h3 class="text-primary h4 mb-2">Food for the Poor</h3>
-            <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
+            <h3 class="text-primary h4 mb-2">Studies</h3>
+            <p>We believe schools and colleges, appropriately organized, can help virtually all students master the knowledge they need to succeed.</p>
           </div>
 
           <div class="col-md-6 col-lg-4 mb-4 text-center">
             <span class="flaticon-donation d-block mb-3 display-3 text-secondary"></span>
             <h3 class="text-primary h4 mb-2">Help &amp; Love</h3>
-            <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
+            <p>We believe a strong education improves the lives of young people.</p>
           </div>
           <div class="col-md-6 col-lg-4 mb-4 text-center">
             <span class="flaticon-dollar d-block mb-3 display-3 text-secondary"></span>
             <h3 class="text-primary h4 mb-2">Give To The Needy</h3>
-            <p>Praesentium magnam pariatur quae necessitatibus eligendi voluptate ducimus.</p>
+            <p>The pleasure of a great manufacturers to choose the things that we consider the needs of the present.</p>
           </div>
           <div class="col-md-6 col-lg-4 mb-4 text-center">
             <span class="flaticon-unity d-block mb-3 display-3 text-secondary"></span>
             <h3 class="text-primary h4 mb-2">Volunteer</h3>
-            <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
+            <p>As a consequence of that is worthy of denouncing pleasure.</p>
           </div>
 
         </div>
@@ -243,15 +242,33 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-lg-6 mb-5">
-            <form class="contact-form" action="contactus.php" method="post">
-              <input type="text" name="name" placeholder="your name">
-              <input type="text" name="mail" placeholder="email">
-               <textarea name="message"  placeholder="Write your message."></textarea>
-               
-              <button type="submit" name="submit"> send mail</button>
-            </form>
+            <form class="contact-form" action="mailto:ghanthas@gmail.com" method="post" enctype="text/plain">
+      <div class="form-group row">
+       <div class="col-md-6 mb-4 mb-lg-0">
+         <input name='name' type="text"  class="form-control" placeholder="Your name">
+       </div>
+     </div>
+
+     <div class="form-group row">
+       <div class="col-md-12">
+         <input name='mail' type="text" class="form-control" placeholder="Email address" a >
+       </div>
+     </div>
+
+     <div class="form-group row">
+       <div class="col-md-12">
+         <textarea name="message"  placeholder="Write your message." cols="30" rows="10"></textarea>
+       </div>
+     </div>
+     <div class="form-group row">
+       <div class="col-md-6 ml-auto">
+         <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Send Message">
+       </div>
+     </div>
+   </form>
+
           </div>
-          
+
         </div>
       </div>
     </div>
