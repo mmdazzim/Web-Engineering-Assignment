@@ -1,13 +1,10 @@
-<?php 
-    
-    include "config.php";
+<?php
 
-    $id= $_GET['id'];
-    $sql_list = "SELECT * FROM student_list WHERE id = $id";
-    $result_list = mysqli_query($link, $sql_list);
-    $result = mysqli_fetch_array($result_list);
-    mysqli_close($link);
+    
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,28 +47,24 @@
     </div>
    
       
-<?php include 'header.php'; ?>
-    <div class="row mb-5 justify-content-center">
-        <div class="col-md-7 text-center">
-            <h2 class="text-black text-uppercase section-title">Student Profile</h2>
-            <p>Details of student.</p>
-        </div>
-    </div>
-    <div class="container mb-5 mt-5">
-        <div class="block-team-member-1 text-center rounded">
-            <figure>
-                <img src="images/<?php echo $result['img_name'] ?>" alt="Image" class="img-fluid rounded-circle">
-            </figure>
-            <h3 class="font-size-20 text-black"><?php echo $result['first_name'] ." ". $result['last_name'] ?></h3>
-            <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3"><?php echo $result['university_name'] ?></span>
-            <p class="px-3 mb-3"><?php echo $result['biography'] ?></p>
-        <div class="">
-            <a href="#" class="btn btn-primary px-4 py-3 btn-block">Sponsor Now</a>
-        </div>
-        </div>
-    </div>
+      <?php include 'header.php'; ?>
+    
 
-
+    <div class="site-section bg-image overlay counter" style="background-image: url('images/hero_1_no-text.jpg');" id="about-section">
+    	<div class="container col-md-4 justify-content-center">
+    		<div class=" text-black">
+    			<h2>DONATE</h2>
+    			<p>Any amount helps!</p>
+    			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <h5>Name</h5>
+                    <input type="name"  name="amount" placeholder="Anonymous"><br><br>
+                    <h5>Amount</h5>
+					<input type="number" min="10" name="amount" placeholder="RM"><br><br>
+					<input type="submit" class="btn btn-primary" value="Donate">
+				</form>
+    		</div>
+    	</div>
+    </div>
 
 <?php include 'footer.php'; ?>
 
