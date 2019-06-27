@@ -80,7 +80,7 @@
                       </figure>
                       <h3 class="font-size-20 text-black"><?php echo $list['first_name'] ." ". $list['last_name'] ?></h3>
                       <span class="d-block font-gray-5 letter-spacing-1 text-uppercase font-size-12 mb-3"><?php echo $list['university_name'] ?></span>
-                      <p class="px-3 mb-3">Age: <?php echo $list['age'] ?> <br> Gender: <?php echo $list['gender'] ?> <br> School Name: <?php echo $list['school_name'] ?> <br>Sponsor Duration: <?php echo $list['sponsor_duration'] ?><br> Sponsor Requirement: RM<?php echo $list['sponsor_requirement'] ?><br> <?php echo $list['id'] ?></p>
+                      <p class="px-3 mb-3">Age: <?php echo $list['age'] ?> <br> Gender: <?php echo $list['gender'] ?> <br> School Name: <?php echo $list['school_name'] ?> <br>Sponsor Duration: <?php echo $list['sponsor_duration'] ?><br> Sponsor Requirement: RM<?php echo $list['sponsor_requirement'] ?></p>
                       <div class="">
                           <a href="student-detail.php?id=<?php echo $list['id'] ?>" class="btn btn-primary px-4 py-3 btn-block">More Detail</a>
                       </div>

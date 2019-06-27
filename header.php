@@ -1,3 +1,13 @@
+<?php 
+
+    if(!isset($_SESSION)) { 
+        session_start(); 
+    }
+
+    
+?>    
+
+
     <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
 
       <div class="container">
@@ -14,21 +24,24 @@
                   <li><a href="index.php #home-section" class="nav-link">Home</a></li>
                   <li><a href="index.php #about-section" class="nav-link">About</a></li>
                   <li><a href="index.php #donate-section" class="nav-link">Donate</a></li>
-                <li><a href="index.php #discover-section" class="nav-link">Admin</a></li>
+                
                     <?php 
-                        if(!isset($_SESSION)) 
-                        { 
-                            session_start(); 
-                        }
                         
-                        if(isset($_SESSION["loggedin"])==true) {
+                        if(isset($_SESSION["loggedin"])==true) {    
+                            
+                            if($_SESSION["isAdmin"]) {
+                                echo '<li><a href="index.php #discover-section" class="nav-link">Admin</a></li>';
+                            }
+                            else {
+                                echo '<li><a href="index.php #discover-section" class="nav-link">Profile</a></li>';
+                            }
                             echo '<li><a href="logout.php" class="nav-link">'.$_SESSION["username"].'(Logout)</a></li>';
                         }
                         else
                             echo '<li><a href="login.php" class="nav-link">Login</a></li>';
                     ?>
                   
-                  <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                  <li><a href="index.php #contact-section" class="nav-link">Contact</a></li>
                 </ul>
               </nav>
           
