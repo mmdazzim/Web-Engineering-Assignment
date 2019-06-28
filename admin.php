@@ -224,6 +224,9 @@
               </table>
              </div>
         </div>
+        </div>
+      </div>
+        <div class="container col-md-4 justify-content-center">
         <div class="wrapper mt-5 text-black">
             <h2>Add Student</h2>
                 <p>Please fill this form to add a student for sponsorship.</p>
@@ -252,7 +255,7 @@
                         <input type="radio" name="gender" value="male" checked> Male<br>
                         <input type="radio" name="gender" value="female"> Female<br>
                     </div>
-
+                    
                     <div class="form-group <?php echo (!empty($school_name_err)) ? 'has-error' : ''; ?>">
                         <label>School Name</label>
                         <input type="text" name="school_name" class="form-control" value="<?php echo $school_name; ?>">
@@ -289,7 +292,6 @@
                 </form>
         </div>
      </div>
-    </div>
 
 <?php include 'footer.php'; ?>
 

@@ -962,7 +962,8 @@ h1, h2, h3, h4, h5,
 
 .block-team-member-1 {
   padding: 30px;
-  border: 1px solid #e9ecef; }
+  border: 1px solid #e9ecef;
+    height: 550px; }
   .block-team-member-1 figure img {
     width: 130px; }
 

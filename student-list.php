@@ -63,7 +63,6 @@
         <div class="row mb-5 justify-content-center">
           <div class="col-md-7 text-center">
               <h2 class="text-black text-uppercase section-title">Our Students In Need</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut corporis, eius, eos consectetur consequuntur sit. Aut, perspiciatis, reprehenderit.</p>
           </div>
         </div>
           
@@ -89,7 +88,7 @@
 
             <?php }
     
-                echo $offset += 3; 
+                $offset += 3; 
                 $sql_list = "SELECT * FROM student_list LIMIT $offset,$limit";
                 $result_list = mysqli_query($link, $sql_list);
                 
